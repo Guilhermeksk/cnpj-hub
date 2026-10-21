@@ -1,0 +1,62 @@
+{
+  "name": "cnpj-hub",
+  "version": "1.0.0",
+  "description": "Consulta de CNPJ resiliente para Node.js: múltiplos provedores com fallback, retry, cache e dados normalizados. Inclui CLI e servidor HTTP.",
+  "keywords": [
+    "cnpj",
+    "receita-federal",
+    "brasilapi",
+    "receitaws",
+    "cnpj-ws",
+    "empresa",
+    "brasil",
+    "cli"
+  ],
+  "license": "MIT",
+  "author": "Guilherme Pizzorno",
+  "homepage": "https://github.com/Guilhermeksk/cnpj-hub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Guilhermeksk/cnpj-hub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Guilhermeksk/cnpj-hub/issues"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "cnpj-hub": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "clean": "node -e \"for (const d of ['dist','.test-build']) require('fs').rmSync(d,{recursive:true,force:true})\"",
+    "prebuild": "npm run clean",
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -p tsconfig.build.json --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "test": "tsc -p tsconfig.test.json && node --test --test-reporter=spec \".test-build/test/*.test.js\"",
+    "coverage": "tsc -p tsconfig.test.json && node --test --experimental-test-coverage \".test-build/test/*.test.js\"",
+    "prepublishOnly": "npm run lint && npm run typecheck && npm test && npm run build"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.6.2",
+    "@types/node": "^22.20.5",
+    "typescript": "^5.9.3"
+  }
+}
